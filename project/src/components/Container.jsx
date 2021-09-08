@@ -14,7 +14,6 @@ function initializer(initState) {
 export default function Container() {
   const [state, dispatch] = useReducer(cardListReducer, initialState, initializer);
   const addList = () => {
-    console.log("add List");
     dispatch(addListAction());
   }
 
@@ -32,7 +31,7 @@ export default function Container() {
       <AddButton handleAdd={addList} title="Add List" />
       <div className="flex a-center overflow-auto">
         {state.list.map((list, index) => (
-          <List {...{ ...list, dispatch, index }} key={index} />
+          <List {...{ list, dispatch, index }} key={index} />
         ))}
       </div>
 

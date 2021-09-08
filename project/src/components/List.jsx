@@ -1,16 +1,15 @@
+import { memo } from "react";
 import { addCardAction, changeListTitleAction, removeListAction } from "../rdx/cardListSlice";
 import AddButton from "./AddButton";
 import Card from "./Card";
 import Element from "./EditableElement";
 import RemoveButton from "./RemoveButton";
 
-export default function List({ title, cards, dispatch, index: listIndex }) {
+function List({ list: { title, cards }, dispatch, index: listIndex }) {
   const removeList = () => {
-    console.log("remove list");
     dispatch(removeListAction(listIndex))
   }
   const addCard = () => {
-    console.log("add card");
     dispatch(addCardAction(listIndex));
   }
 
@@ -23,10 +22,11 @@ export default function List({ title, cards, dispatch, index: listIndex }) {
       <RemoveButton handleRemove={removeList} />
       <Element value={title} handleChange={handleListTitleChange} dataKey="title" />
       {Array.isArray(cards) && cards.map((card, index) => (
-        <Card {...{...card, listIndex, dispatch, index}} key={`${index} ${card.title}`} />
+        <Card {...{...card, listIndex, dispatch, index}} key={`${card.created} ${card.title}`} />
       ))}
       <AddButton handleAdd={addCard} title="Add Card" />
     </div>
   )
 }
 
+export default memo(List);

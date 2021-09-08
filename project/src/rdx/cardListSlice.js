@@ -21,7 +21,6 @@ const CHANGE_CARD_DATA = "CHANGE_CARD_DATA";
 
 export const cardListReducer = (state, { type, payload }) => {
   let tempState = JSON.parse(JSON.stringify(state));
-  console.log({ tempState, payload });
   switch (type) {
     case ADD_LIST:
       tempState.list = [...tempState.list, initialList()];
@@ -41,7 +40,6 @@ export const cardListReducer = (state, { type, payload }) => {
       tempState.list[payload.listIndex].cards.sort((a,b) => b.created - a.created);
       break;
     case CHANGE_LIST_TITLE:
-      console.log(tempState.list[payload.listIndex].title, tempState, payload);
       tempState.list[payload.listIndex].title = payload.title;
       break;
     case CHANGE_CARD_DATA:
@@ -50,7 +48,6 @@ export const cardListReducer = (state, { type, payload }) => {
     default:
       break;
   }
-  console.log({ tempState: JSON.parse(JSON.stringify(tempState)) });
   return tempState;
 }
 

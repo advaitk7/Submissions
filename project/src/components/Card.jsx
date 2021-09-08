@@ -1,14 +1,13 @@
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import Draggable from "react-draggable";
 import { changeCardDataAction, moveCardAction, removeCardAction } from "../rdx/cardListSlice";
 import Element from "./EditableElement";
 import RemoveButton from "./RemoveButton";
 
-export default function Card({ title, description,created, dispatch, listIndex, index }) {
+function Card({ title, description,created, dispatch, listIndex, index }) {
   const ref = useRef(null);
 
   const handleCross = () => {
-    console.log('handle cross');
     dispatch(removeCardAction(listIndex, index));
   }
 
@@ -72,3 +71,4 @@ export default function Card({ title, description,created, dispatch, listIndex, 
   );
 }
 
+export default memo(Card);
